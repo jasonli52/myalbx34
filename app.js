@@ -1,7 +1,7 @@
 //引入express模板
 const express = require("express");
-//引入fs
-const fs = require("fs");
+//引入路由模块
+const router = require("./router/router.js");
 //创建应用
 const app = express();
 //添加对指定端口的监听
@@ -12,12 +12,4 @@ app.listen(3000, (req, res) => {
 app.use("/assets", express.static("assets"));
 app.use("/uploads", express.static("uploads"));
 //添加路由配置
-app.get("/", (req, res) => {
-  fs.readFile(__dirname + "/views/admin/index.html", (err, data) => {
-    if (err) {
-      res.end("404");
-    } else {
-      res.end(data);
-    }
-  });
-});
+app.use(router);
